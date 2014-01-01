@@ -11,7 +11,7 @@ setup(
     license='Python License',
     url='https://github.com/davidjamesmoss/django-little-printer-menu',
     packages=find_packages(),
-    install_requires=['python-requests','django-crispy-forms'],
+    install_requires=['requests','django-crispy-forms'],
     package_data={
         '': [
             'templates/menu/*.html',
