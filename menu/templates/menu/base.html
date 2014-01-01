@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Menu Builder</title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+        <script src="//codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <style>
+            body {
+              padding-top: 20px;
+              padding-bottom: 20px;
+            }
+            .header {
+                border-bottom: 1px solid #e5e5e5;
+            }
+            .header h3 {
+              margin-top: 0;
+              margin-bottom: 0;
+              line-height: 40px;
+              padding-bottom: 19px;
+            }
+            iframe {
+                margin: 25px 0;
+                padding: 10px 10px 10px 30px;
+                border: none;
+                border-left: 1px solid #ddd;
+                width: 100%;
+                height: 800px;
+                float: right;
+            }
+            .narrow {
+                width: 1%;
+            }
+            textarea {
+                width: 100%;
+                height: 50px;
+                display: block;
+                margin: 0 0 20px 0;
+            }
+        </style>
+    </head>
+    <body>
+         <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class="{% block nav_create %}{% endblock %}"><a href="{% url "menu_create" %}">Create menu</a></li>
+                    <li class="{% block nav_dishes %}{% endblock %}"><a href="{% url "menu_dishes" %}">Dishes</a></li>
+                    <li class="{% block nav_setup %}{% endblock %}"><a href="{% url "menu_setup" %}"><span class="glyphicon glyphicon-cog"></span></a></li>
+                </ul>
+                <h3 class="text-muted">Menu Builder</h3>
+            </div>
+
+            {% block heading %}{% endblock %}
+
+            {% for message in messages %}
+                <br />
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                    <strong>{% if message.tags == 'error' %}Hold Up!{% else %}{{ message.tags|capfirst }}{% endif %}</strong><br />
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "menu/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block nav_setup %}active{% endblock %}
+
+{% block heading %}
+    <h1>Settings</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            {% crispy form %}
+        </div>
+        <div class="col-md-5">
+            <br />
+            <div class="alert alert-info">
+                <strong>Where to find your printer key</strong>
+                <p>You can obtain your printer key from the BERG Cloud Developer website (you will need to login to your BERG Cloud account).</p>
+                <br />
+                <a href="http://remote.bergcloud.com/developers/littleprinter/direct_print_codes" target="_blank" class="btn btn-info btn-sm">Get your key</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

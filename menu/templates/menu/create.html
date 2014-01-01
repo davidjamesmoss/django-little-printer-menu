@@ -1,0 +1,52 @@
+{% extends "menu/base.html" %}
+
+{% block nav_create %}active{% endblock %}
+
+{% block content %}
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-7">
+                <br />
+                <ul class="nav nav-tabs">
+                    {% for k,v in days.iteritems %}
+                        <li {% if k == current_day_key %}class="active"{% endif %}><a href="{% url "menu_create" day=k %}">{{ v }}</a></li>
+                    {% endfor %}
+                </ul>
+
+                <h3>{{ current_day }}’s choices</h3>
+                <table class="table">
+                    {% for m in menu %}
+                        <tr>
+                            <td>{{ m }}</td>
+                            <td class="narrow"><button type="submit" name="remove" value="{{ m.id }}" href="" class="btn btn-danger btn-xs">Remove</a></td>
+                        </tr>
+                    {% empty %}
+                        <div class="alert alert-info">No dishes selected.</div>
+                    {% endfor %}
+                </table>
+
+
+                <h3>Dishes</h3>
+                 <table class="table">
+                    {% for d in dishes %}
+                        <tr>
+                            <td class="narrow"><input type="radio" name="dish" value="{{ d.id }}" /></td>
+                            <td>{{ d }}</td>
+                        </tr>
+                        {% empty %}
+                        <div class="alert alert-info">No dishes. Go to Dishes to add some.</div>
+                    {% endfor %}
+                </table>
+                <h3>Alternative</h3>
+                <textarea name="alternative"></textarea>
+                <button type="submit" name="action" value="add" class="btn btn-primary btn-lg">Add</button>
+
+            </div>
+            <div class="col-md-5">
+                <iframe src="{% url "menu_preview" %}"></iframe>
+                <button type="submit" name="print" value="1" class="btn btn-primary btn-lg pull-right">Print</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

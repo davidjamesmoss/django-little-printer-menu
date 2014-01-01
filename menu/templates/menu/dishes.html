@@ -1,0 +1,27 @@
+{% extends "menu/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block nav_dishes %}active{% endblock %}
+
+{% block heading %}
+    <h1>Dishes</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="">
+        {% csrf_token %}
+            <table class="table">
+            {% for d in dishes %}
+                <tr>
+                    <td>{{ d }}</td>
+                    <td class="narrow"><button type="submit" name="delete" value="{{ d.id }}" href="" class="btn btn-danger btn-xs">Delete</a></td>
+                </tr>
+            {% empty %}
+                <div class="alert alert-info">No dishes. Add your first one below.</div>
+            {% endfor %}
+        </table>
+        <h3>Add a dish</h3>
+        {% crispy form %}
+    </form>
+{% endblock %}
+
