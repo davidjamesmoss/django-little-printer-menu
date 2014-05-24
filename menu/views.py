@@ -32,7 +32,7 @@ def _build_menu(request):
 
 def create_menu(request, day):
     if not day:
-        day = 'sat'
+        day = 'fri'
     menu = Menu.objects.filter(day=day)
     days = OrderedDict(Menu.day_choices)
     setup = Setup.values.get()
@@ -41,8 +41,7 @@ def create_menu(request, day):
     if request.method == 'POST':
         if request.POST.get('print', False):
             if setup.printer_key:
-                url = '%s%s' % (PRINT_URL,
-                                setup.printer_key)
+                url = '%s%s' % (PRINT_URL, setup.printer_key)
             else:
                 messages.add_message(request, messages.ERROR,
                                      'You need to add your printer key first.')

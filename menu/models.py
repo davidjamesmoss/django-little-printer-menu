@@ -29,13 +29,13 @@ class Dish(models.Model):
 
 class Menu(models.Model):
     day_choices = (
+        ('fri', 'Friday'),
         ('sat', 'Saturday'),
         ('sun', 'Sunday'),
         ('mon', 'Monday'),
         ('tue', 'Tuesday'),
         ('wed', 'Wednesday'),
         ('thu', 'Thursday'),
-        ('fri', 'Friday'),
     )
 
     day = models.CharField('Day', max_length=3, choices=day_choices,
